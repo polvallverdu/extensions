@@ -20,6 +20,7 @@ const newMatchGitHub =
   /### Extension\s*(?:https:\/\/)?(?:www\.)?github\.com\/raycast\/extensions\/[^\s]*extensions\/([^\/\s]+)/;
 const oldMatchGithub =
   /# Extension – \[[^\]]*\]\(https:\/\/(?:www\.)?github\.com\/raycast\/extensions\/[^\s]*extensions\/([^\/\s]+)\/\)/;
+const operatingSystemMatch = /### Operating System\s*(macOS|Windows)/;
 
 const closeIssueMatch = /@raycastbot close this issue/;
 const closeIssueAsNotPlannedMatch = /@raycastbot close as not planned/;
@@ -200,6 +201,25 @@ export default async ({ github, context }: API) => {
     repo: context.repo.repo,
     labels: [extensionLabel(extension, extensionName2Folder)],
   });
+
+  // Extract operating system from issue body and add platform label
+  if (context.payload.issue.body && operatingSystemMatch.test(context.payload.issue.body)) {
+    const [, os] = operatingSystemMatch.exec(context.payload.issue.body) || [];
+    if (os) {
+      const platformLabel = `platform: ${os}`;
+      console.log(`Adding platform label: ${platformLabel}`);
+      try {
+        await github.rest.issues.addLabels({
+          issue_number: context.payload.issue.number,
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          labels: [platformLabel],
+        });
+      } catch (error) {
+        console.error(`Failed to add platform label ${platformLabel}:`, error);
+      }
+    }
+  }
 
   try {
     await github.rest.issues.removeLabel({
