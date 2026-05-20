@@ -203,10 +203,26 @@ export default async ({ github, context }: API) => {
   });
 
   // Extract operating system from issue body and add platform label
-  if (context.payload.issue.body && operatingSystemMatch.test(context.payload.issue.body)) {
-    const [, os] = operatingSystemMatch.exec(context.payload.issue.body) || [];
+  const osMatch = context.payload.issue.body && operatingSystemMatch.exec(context.payload.issue.body);
+  if (osMatch) {
+    const [, os] = osMatch;
     if (os) {
       const platformLabel = `platform: ${os}`;
+      const oppositePlatformLabel = os === "macOS" ? "platform: Windows" : "platform: macOS";
+
+      if (context.payload.action === "edited") {
+        try {
+          await github.rest.issues.removeLabel({
+            issue_number: context.payload.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: oppositePlatformLabel,
+          });
+        } catch {
+          // ignore, it might not be there
+        }
+      }
+
       console.log(`Adding platform label: ${platformLabel}`);
       try {
         await github.rest.issues.addLabels({
