@@ -1,0 +1,104 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "anycase",
+  "title": "AnyCase",
+  "description": "Convert selected text into uppercase, lowercase, etc.",
+  "icon": "extension-icon.png",
+  "author": "polv",
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
+  "categories": [
+    "Productivity"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "change-casing",
+      "title": "Change Casing",
+      "description": "Pick a casing from the list and apply it to the selected text",
+      "mode": "view"
+    },
+    {
+      "name": "uppercase",
+      "title": "To UPPERCASE",
+      "description": "Convert selected text to UPPERCASE",
+      "mode": "no-view"
+    },
+    {
+      "name": "lowercase",
+      "title": "To Lowercase",
+      "description": "Convert selected text to lowercase",
+      "mode": "no-view"
+    },
+    {
+      "name": "title",
+      "title": "To Title Case",
+      "description": "Convert selected text to Title Case",
+      "mode": "no-view"
+    },
+    {
+      "name": "sentence",
+      "title": "To Sentence Case",
+      "description": "Convert selected text to Sentence case",
+      "mode": "no-view"
+    },
+    {
+      "name": "camel",
+      "title": "To CamelCase",
+      "description": "Convert selected text to camelCase",
+      "mode": "no-view"
+    },
+    {
+      "name": "pascal",
+      "title": "To PascalCase",
+      "description": "Convert selected text to PascalCase",
+      "mode": "no-view"
+    },
+    {
+      "name": "snake",
+      "title": "To Snake_case",
+      "description": "Convert selected text to snake_case",
+      "mode": "no-view"
+    },
+    {
+      "name": "kebab",
+      "title": "To Kebab-Case",
+      "description": "Convert selected text to kebab-case",
+      "mode": "no-view"
+    },
+    {
+      "name": "screaming",
+      "title": "To SCREAMING_SNAKE_CASE",
+      "description": "Convert selected text to SCREAMING_SNAKE_CASE",
+      "mode": "no-view"
+    },
+    {
+      "name": "dot",
+      "title": "To Dot.case",
+      "description": "Convert selected text to dot.case",
+      "mode": "no-view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.104.17",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
