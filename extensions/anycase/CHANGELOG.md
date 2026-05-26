@@ -1,3 +1,3 @@
 # AnyCase Changelog
 
-## [Initial Version] - 2026-05-21
+## [Initial Version] - {PR_MERGE_DATE}
