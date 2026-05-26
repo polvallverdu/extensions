@@ -22,7 +22,10 @@ export const CONVERTERS: { key: string; name: string; convert: (t: string) => st
   {
     key: "sentence",
     name: "Sentence case",
-    convert: (t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(),
+    convert: (t) => {
+      const joined = splitWords(t).join(" ");
+      return joined.charAt(0).toUpperCase() + joined.slice(1).toLowerCase();
+    },
   },
   {
     key: "camel",
