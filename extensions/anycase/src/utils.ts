@@ -29,6 +29,7 @@ export const CONVERTERS: { key: string; name: string; convert: (t: string) => st
     name: "camelCase",
     convert: (t) => {
       const words = splitWords(t);
+      if (words.length === 0) return t;
       return (
         words[0].toLowerCase() +
         words
