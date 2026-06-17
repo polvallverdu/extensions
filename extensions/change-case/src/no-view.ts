@@ -1,4 +1,4 @@
-import { Clipboard, getPreferenceValues, popToRoot, showHUD, showToast, Toast } from "@raycast/api";
+import { Clipboard, getPreferenceValues, popToRoot, showHUD } from "@raycast/api";
 import { CaseType, modifyCasesWrapper } from "./cases.js";
 import { NoTextError, readContent } from "./utils.js";
 
@@ -10,11 +10,7 @@ export async function applyCase(caseType: CaseType): Promise<void> {
     content = await readContent(preferences.source);
   } catch (error) {
     if (error instanceof NoTextError) {
-      await showToast({
-        style: Toast.Style.Failure,
-        title: "No text available",
-        message: "Please ensure that text is either selected or copied",
-      });
+      await showHUD("❌ No text available — select text or copy to clipboard first");
     }
     return;
   }
