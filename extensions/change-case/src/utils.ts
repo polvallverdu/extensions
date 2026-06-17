@@ -16,8 +16,8 @@ async function getSelection(): Promise<string> {
 }
 
 export async function readContent(preferredSource: string): Promise<string> {
-  const clipboard = (await Clipboard.readText()) ?? "";
-  const selected = await getSelection();
+  const [clipboardRaw, selected] = await Promise.all([Clipboard.readText(), getSelection()]);
+  const clipboard = clipboardRaw ?? "";
 
   if (preferredSource === "clipboard") {
     if (clipboard) return clipboard;
